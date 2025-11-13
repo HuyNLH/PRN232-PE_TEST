@@ -61,6 +61,30 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Auto-migrate database on startup (Production)
+if (app.Environment.IsProduction())
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        try
+        {
+            Console.WriteLine("Running database migrations...");
+            await dbContext.Database.MigrateAsync();
+            Console.WriteLine("Database migrations completed!");
+            
+            // Seed data if database is empty
+            var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+            await seeder.SeedAsync();
+            Console.WriteLine("Database seeding completed!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Database migration error: {ex.Message}");
+        }
+    }
+}
+
 // Handle --seed command line argument
 if (args.Contains("--seed"))
 {
