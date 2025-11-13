@@ -1,0 +1,11 @@
+# Render.com configuration
+services:
+  - type: web
+    name: postmanagement-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__Default
+        sync: false  # Set this in Render Dashboard
