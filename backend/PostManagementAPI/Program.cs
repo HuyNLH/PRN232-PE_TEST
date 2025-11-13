@@ -49,11 +49,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins(
-                    "http://localhost:5173", 
-                    "http://localhost:3000",
-                    "http://localhost",
-                    "https://prn232-pe-test.onrender.com")
+            policy.AllowAnyOrigin()  // Allow all origins (including Vercel)
                   .AllowAnyMethod()
                   .AllowAnyHeader();
         });
