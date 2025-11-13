@@ -2,10 +2,6 @@ C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\a
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\appsettings.json
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.staticwebassets.endpoints.json
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.exe
-C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.deps.json
-C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.runtimeconfig.json
-C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.dll
-C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.pdb
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\CloudinaryDotNet.dll
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\Humanizer.dll
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
@@ -119,6 +115,7 @@ C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\P
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.csproj.CoreCompileInputs.cache
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.sourcelink.json
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\scopedcss\bundle\PostManagementAPI.styles.css
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\staticwebassets.build.json.cache
@@ -128,5 +125,10 @@ C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\P
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.dll
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\refint\PostManagementAPI.dll
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.pdb
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.deps.json
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.runtimeconfig.json
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.dll
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\PostManagementAPI.pdb
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.genruntimeconfig.cache
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\ref\PostManagementAPI.dll
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\appsettings.example.json

@@ -13,13 +13,29 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Post Management API",
+        Title = "Movie Management API",
         Version = "v1",
-        Description = "A REST API for managing posts with image upload support (Cloudinary integration)",
+        Description = @"A comprehensive REST API for managing movies with advanced features:
+        
+**Features:**
+- Full CRUD operations for movies
+- Search movies by title
+- Filter by genre
+- Sort by rating (ascending/descending)
+- Pagination support
+- Image upload via file or URL (Cloudinary integration)
+- Automatic database seeding with sample data
+
+**Quick Start:**
+1. Use GET /api/movies to retrieve all movies
+2. Use POST /api/movies to create a new movie
+3. Use PUT /api/movies/{id} to update a movie
+4. Use DELETE /api/movies/{id} to remove a movie
+5. Check /health for API status",
         Contact = new OpenApiContact
         {
             Name = "API Support",
-            Email = "support@postmanagement.com"
+            Email = "support@movieapi.com"
         }
     });
     
@@ -27,6 +43,9 @@ builder.Services.AddSwaggerGen(options =>
     
     // Support for file uploads in Swagger UI
     options.OperationFilter<FileUploadOperationFilter>();
+    
+    // Add schema examples
+    options.SchemaFilter<MovieSchemaFilter>();
 });
 
 // Configure PostgreSQL Database
@@ -67,18 +86,23 @@ if (app.Environment.IsProduction())
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         try
         {
-            Console.WriteLine("Running database migrations...");
+            Console.WriteLine("🔄 [PRODUCTION] Running database migrations...");
+            Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("Default")?.Substring(0, 50)}...");
+            
             await dbContext.Database.MigrateAsync();
-            Console.WriteLine("Database migrations completed!");
+            
+            Console.WriteLine("✅ [PRODUCTION] Database migrations completed successfully!");
             
             // Seed data if database is empty
             var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
             await seeder.SeedAsync();
-            Console.WriteLine("Database seeding completed!");
+            Console.WriteLine("✅ [PRODUCTION] Database seeding completed!");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Database migration error: {ex.Message}");
+            Console.WriteLine($"❌ [PRODUCTION] Database migration error: {ex.Message}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
+            throw; // Re-throw to prevent app from starting with broken DB
         }
     }
 }
@@ -112,11 +136,18 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Health check endpoint
+// Health endpoint - simple OK response
+app.MapGet("/health", () => Results.Ok("OK"))
+    .WithName("HealthCheck")
+    .WithTags("Health")
+    .Produces<string>(StatusCodes.Status200OK);
+
+// Root endpoint for API info
 app.MapGet("/", () => new { 
     status = "ok", 
-    message = "Post Management API is running",
-    timestamp = DateTime.UtcNow 
+    message = "Movie Management API is running",
+    timestamp = DateTime.UtcNow,
+    endpoints = new[] { "/swagger", "/health", "/api/movies" }
 });
 
 // Manual seed endpoint (for debugging)
@@ -126,7 +157,9 @@ app.MapPost("/api/seed", async (IServiceProvider serviceProvider) =>
     var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
     await seeder.SeedAsync();
     return Results.Ok(new { message = "Database seeded successfully!" });
-});
+})
+.WithName("SeedDatabase")
+.WithTags("Database");
 
 app.Run();
 
