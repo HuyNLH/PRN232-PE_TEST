@@ -1,11 +1,13 @@
-# Render.com configuration
 services:
   - type: web
     name: postmanagement-api
-    env: docker
+    runtime: docker
+    repo: https://github.com/HuyNLH/PRN232-PE_TEST
+    branch: main
     dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-      - key: ConnectionStrings__Default
-        sync: false  # Set this in Render Dashboard
+      - key: PORT
+        value: 10000
