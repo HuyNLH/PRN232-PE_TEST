@@ -22,9 +22,9 @@ function AddMovie() {
       
       // Handle poster image (file or URL)
       if (movieData.posterFile) {
-        formData.append('posterFile', movieData.posterFile)
+        formData.append('PosterFile', movieData.posterFile)
       } else if (movieData.posterImage) {
-        formData.append('posterImage', movieData.posterImage)
+        formData.append('PosterUrl', movieData.posterImage)
       }
       
       await moviesApi.create(formData)

@@ -22,11 +22,13 @@ namespace PostManagementAPI.Services
                 // Ensure database is created
                 await _context.Database.MigrateAsync();
 
-                // Check if we already have movies
-                if (await _context.Movies.AnyAsync())
+                // Delete all existing movies first
+                var existingMovies = await _context.Movies.ToListAsync();
+                if (existingMovies.Any())
                 {
-                    _logger.LogInformation("Database already contains movies. Skipping seed.");
-                    return;
+                    _logger.LogInformation($"Deleting {existingMovies.Count} existing movies...");
+                    _context.Movies.RemoveRange(existingMovies);
+                    await _context.SaveChangesAsync();
                 }
 
                 _logger.LogInformation("Seeding database with sample movies...");
@@ -38,7 +40,7 @@ namespace PostManagementAPI.Services
                         Title = "The Shawshank Redemption",
                         Genre = "Drama",
                         Rating = 5,
-                        PosterImage = "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+                        PosterImage = "https://picsum.photos/seed/shawshank/400/600",
                         CreatedAt = DateTime.UtcNow.AddDays(-10),
                         UpdatedAt = DateTime.UtcNow.AddDays(-10)
                     },
@@ -47,7 +49,7 @@ namespace PostManagementAPI.Services
                         Title = "The Godfather",
                         Genre = "Crime",
                         Rating = 5,
-                        PosterImage = "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+                        PosterImage = "https://picsum.photos/seed/godfather/400/600",
                         CreatedAt = DateTime.UtcNow.AddDays(-8),
                         UpdatedAt = DateTime.UtcNow.AddDays(-8)
                     },
@@ -56,7 +58,7 @@ namespace PostManagementAPI.Services
                         Title = "The Dark Knight",
                         Genre = "Action",
                         Rating = 5,
-                        PosterImage = "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+                        PosterImage = "https://picsum.photos/seed/darkknight/400/600",
                         CreatedAt = DateTime.UtcNow.AddDays(-5),
                         UpdatedAt = DateTime.UtcNow.AddDays(-5)
                     },
@@ -65,7 +67,7 @@ namespace PostManagementAPI.Services
                         Title = "Inception",
                         Genre = "Sci-Fi",
                         Rating = 4,
-                        PosterImage = "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+                        PosterImage = "https://picsum.photos/seed/inception/400/600",
                         CreatedAt = DateTime.UtcNow.AddDays(-3),
                         UpdatedAt = DateTime.UtcNow.AddDays(-3)
                     },
@@ -74,7 +76,7 @@ namespace PostManagementAPI.Services
                         Title = "Pulp Fiction",
                         Genre = "Crime",
                         Rating = 4,
-                        PosterImage = "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+                        PosterImage = "https://picsum.photos/seed/pulpfiction/400/600",
                         CreatedAt = DateTime.UtcNow.AddDays(-1),
                         UpdatedAt = DateTime.UtcNow.AddDays(-1)
                     }

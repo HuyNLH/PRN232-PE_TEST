@@ -1,4 +1,6 @@
-export default function ConfirmModal({ title, message, onConfirm, onCancel }) {
+export default function ConfirmModal({ isOpen, onClose, onConfirm, title, message, confirmLabel = "Yes, Delete", confirmClass = "bg-gradient-to-r from-danger-500 to-danger-600 hover:from-danger-600 hover:to-danger-700" }) {
+  if (!isOpen) return null
+
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in p-4">
       <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl transform animate-bounce-subtle">
@@ -16,16 +18,16 @@ export default function ConfirmModal({ title, message, onConfirm, onCancel }) {
         {/* Buttons */}
         <div className="flex gap-3">
           <button
-            onClick={onCancel}
+            onClick={onClose}
             className="flex-1 bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-xl hover:bg-gray-200 transition-all duration-200"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 bg-gradient-to-r from-danger-500 to-danger-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-danger-600 hover:to-danger-700 transform hover:scale-105 transition-all duration-200 shadow-lg shadow-danger-500/30"
+            className={`flex-1 text-white font-semibold py-3 px-6 rounded-xl transform hover:scale-105 transition-all duration-200 shadow-lg ${confirmClass}`}
           >
-            Yes, Delete
+            {confirmLabel}
           </button>
         </div>
       </div>

@@ -152,8 +152,16 @@ namespace PostManagementAPI.Controllers
         [Consumes("application/json", "multipart/form-data")]
         public async Task<ActionResult<MovieResponseDto>> CreateMovie([FromForm] CreateMovieWithFileDto dto)
         {
+            _logger.LogInformation("=== CreateMovie called ===");
+            _logger.LogInformation($"Title: {dto.Title}, Genre: {dto.Genre}, Rating: {dto.Rating}");
+            
             if (!ModelState.IsValid)
             {
+                _logger.LogWarning("ModelState is invalid");
+                foreach (var error in ModelState)
+                {
+                    _logger.LogWarning($"Key: {error.Key}, Errors: {string.Join(", ", error.Value.Errors.Select(e => e.ErrorMessage))}");
+                }
                 return BadRequest(ModelState);
             }
 
@@ -161,19 +169,25 @@ namespace PostManagementAPI.Controllers
             {
                 string? imageUrl = null;
 
+                // Debug logging
+                _logger.LogInformation($"CreateMovie - PosterFile: {dto.PosterFile?.FileName ?? "NULL"}, PosterUrl: {dto.PosterUrl ?? "NULL"}");
+
                 // If file is uploaded, validate and upload to Cloudinary
                 if (dto.PosterFile != null)
                 {
+                    _logger.LogInformation($"Uploading file: {dto.PosterFile.FileName}");
                     if (!_imageUploadService.IsValidImageFile(dto.PosterFile))
                     {
                         return BadRequest(new { message = "Invalid image file. File must be JPEG, PNG, GIF, or WebP and under 5MB." });
                     }
 
                     imageUrl = await _imageUploadService.UploadImageAsync(dto.PosterFile);
+                    _logger.LogInformation($"File uploaded successfully: {imageUrl}");
                 }
                 // Otherwise, use the URL if provided
                 else if (!string.IsNullOrWhiteSpace(dto.PosterUrl))
                 {
+                    _logger.LogInformation($"Using URL: {dto.PosterUrl}");
                     imageUrl = dto.PosterUrl;
                 }
 
