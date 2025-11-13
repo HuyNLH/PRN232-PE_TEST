@@ -57,6 +57,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+Console.WriteLine("✅ CORS configured: AllowAnyOrigin enabled for Vercel");
+
 // Auto-migrate database on startup (Production)
 if (app.Environment.IsProduction())
 {
