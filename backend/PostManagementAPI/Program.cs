@@ -119,6 +119,15 @@ app.MapGet("/", () => new {
     timestamp = DateTime.UtcNow 
 });
 
+// Manual seed endpoint (for debugging)
+app.MapPost("/api/seed", async (IServiceProvider serviceProvider) =>
+{
+    using var scope = serviceProvider.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedAsync();
+    return Results.Ok(new { message = "Database seeded successfully!" });
+});
+
 app.Run();
 
 // Make Program class accessible for testing
