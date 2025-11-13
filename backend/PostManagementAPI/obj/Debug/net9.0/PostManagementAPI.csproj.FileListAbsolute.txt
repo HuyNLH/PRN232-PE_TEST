@@ -132,3 +132,4 @@ C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\P
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\PostManagementAPI.genruntimeconfig.cache
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\obj\Debug\net9.0\ref\PostManagementAPI.dll
 C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\appsettings.example.json
+C:\Users\Acer\Documents\PE_PRN_Test\backend\PostManagementAPI\bin\Debug\net9.0\appsettings.Production.json
