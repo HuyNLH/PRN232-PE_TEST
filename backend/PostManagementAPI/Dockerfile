@@ -21,11 +21,12 @@ WORKDIR /app
 # Copy published app
 COPY --from=publish /app/publish .
 
-# Expose port
-EXPOSE 5201
+# Expose port (Render uses PORT env variable)
+ENV PORT=10000
+EXPOSE $PORT
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://+:5201
+ENV ASPNETCORE_URLS=http://+:${PORT}
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Run the app
