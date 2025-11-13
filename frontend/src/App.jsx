@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
-import { Sparkles, Home, PlusCircle } from 'lucide-react'
-import ListPage from './pages/ListPage'
-import CreatePage from './pages/CreatePage'
-import EditPage from './pages/EditPage'
+import { Film, Home, PlusCircle } from 'lucide-react'
+import MovieList from './pages/MovieList'
+import AddMovie from './pages/AddMovie'
+import EditMovie from './pages/EditMovie'
 
 function NavLink({ to, children, icon }) {
   const location = useLocation()
@@ -34,18 +34,18 @@ function App() {
               {/* Logo */}
               <Link to="/" className="flex items-center gap-3 group">
                 <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
-                  <Sparkles className="text-white" size={20} />
+                  <Film className="text-white" size={20} />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gradient">Post Manager</h1>
-                  <p className="text-xs text-gray-500">Modern & Simple</p>
+                  <h1 className="text-xl font-bold text-gradient">Movie Watchlist</h1>
+                  <p className="text-xs text-gray-500">Track & Discover</p>
                 </div>
               </Link>
 
               {/* Navigation Links */}
               <div className="flex items-center gap-2">
-                <NavLink to="/" icon={<Home size={18} />}>All Posts</NavLink>
-                <NavLink to="/create" icon={<PlusCircle size={18} />}>Create New</NavLink>
+                <NavLink to="/" icon={<Home size={18} />}>All Movies</NavLink>
+                <NavLink to="/add" icon={<PlusCircle size={18} />}>Add Movie</NavLink>
               </div>
             </div>
           </div>
@@ -54,9 +54,9 @@ function App() {
         {/* Main Content with Animation */}
         <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 animate-fade-in">
           <Routes>
-            <Route path="/" element={<ListPage />} />
-            <Route path="/create" element={<CreatePage />} />
-            <Route path="/edit/:id" element={<EditPage />} />
+            <Route path="/" element={<MovieList />} />
+            <Route path="/add" element={<AddMovie />} />
+            <Route path="/edit/:id" element={<EditMovie />} />
           </Routes>
         </main>
 

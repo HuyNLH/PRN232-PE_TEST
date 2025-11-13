@@ -1,37 +1,38 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:7123';
+// Use environment variable for API URL with fallback
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5201';
 
 const api = axios.create({
-  baseURL: `${API_URL}/api`,
+  baseURL: `${API_URL}/api/movies`,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Posts API
-export const postsApi = {
-  // Get all posts with optional filters
-  getAll: (params = {}) => api.get('/posts', { params }),
+// Movies API
+export const moviesApi = {
+  // Get all movies with optional filters (search, genre, sort, pagination)
+  getAll: (params = {}) => api.get('/', { params }),
   
-  // Get single post by ID
-  getById: (id) => api.get(`/posts/${id}`),
+  // Get single movie by ID
+  getById: (id) => api.get(`/${id}`),
   
-  // Create new post with JSON data
-  create: (data) => api.post('/posts', data, {
+  // Create new movie with form data (supports file upload)
+  create: (data) => api.post('/', data, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }),
   
-  // Update post
-  update: (id, data) => api.put(`/posts/${id}`, data, {
+  // Update movie with form data
+  update: (id, data) => api.put(`/${id}`, data, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }),
   
-  // Delete post
-  delete: (id) => api.delete(`/posts/${id}`),
+  // Delete movie
+  delete: (id) => api.delete(`/${id}`),
 };
 
 // Health check
-export const healthCheck = () => api.get('/', { baseURL: API_URL });
+export const healthCheck = () => axios.get(`${API_URL}/health`);
 
 export default api;
