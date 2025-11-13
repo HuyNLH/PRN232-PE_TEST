@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: postmanagement-db
+    environment:
+      POSTGRES_DB: PostManagementDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Huydzdz123@
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postmanagement-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend/PostManagementAPI
+      dockerfile: Dockerfile
+    container_name: postmanagement-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__Default=Host=postgres;Port=5432;Database=PostManagementDB;Username=postgres;Password=Huydzdz123@
+    ports:
+      - "5201:5201"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - postmanagement-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: postmanagement-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - postmanagement-network
+    restart: unless-stopped
+
+networks:
+  postmanagement-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
